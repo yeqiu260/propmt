@@ -1,0 +1,6 @@
+{
+  "name": "Meadowbell - Hollyoak's Plucky Sprout Squad",
+  "description": "Official landing hero for Hollyoak's Plucky Sprout Squad, an animated kids' farming series from Meadowbell studio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

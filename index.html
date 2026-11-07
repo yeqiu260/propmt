@@ -1,0 +1,1199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meadowbell - Hollyoak's Plucky Sprout Squad</title>
+    <meta name="description" content="Official landing hero for Hollyoak's Plucky Sprout Squad, an animated kids' farming series from Meadowbell studio." />
+    <meta property="og:title" content="Meadowbell - Hollyoak's Plucky Sprout Squad" />
+    <meta property="og:description" content="Official landing hero for Hollyoak's Plucky Sprout Squad, an animated kids' farming series from Meadowbell studio." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Self-hosted font preloads and definitions -->
+    <link rel="preload" href="/fonts/grandstander-900.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin />
+
+    <style>
+      /* Self-hosted Grandstander 900 & Inter 400/500 */
+      @font-face {
+        font-family: 'Grandstander';
+        font-style: normal;
+        font-weight: 900;
+        font-display: swap;
+        src: url('/fonts/grandstander-900.woff2') format('woff2'),
+             url('fonts/grandstander-900.woff2') format('woff2'),
+             url('https://fonts.gstatic.com/s/grandstander/v20/ga6fawtA-GpSsTWrnNHPCSIMZhhKpFjyNZIQD_a5P3_ctw.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/inter-400.woff2') format('woff2'),
+             url('fonts/inter-400.woff2') format('woff2'),
+             url('https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2') format('woff2');
+      }
+
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url('/fonts/inter-500.woff2') format('woff2'),
+             url('fonts/inter-500.woff2') format('woff2'),
+             url('https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2') format('woff2');
+      }
+
+      /* Base & Frame Scaling */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --u: calc(100vw / 1440);
+        --green-btn: #5b875c;
+        --blue-shadow: rgba(28, 70, 120, 0.28);
+      }
+
+      html, body {
+        width: 100%;
+        min-height: 100vh;
+        background-color: #6da2bc;
+        color: #ffffff;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font-family: inherit;
+        border: none;
+        cursor: pointer;
+        background: none;
+      }
+
+      /* Hero Frame: 1440x1280 (9:8 ratio) */
+      .hero-frame {
+        position: relative;
+        width: 100vw;
+        height: calc(1280 * var(--u));
+        overflow: hidden;
+        user-select: none;
+      }
+
+      /* Scene: 9:8 Plate + Overlaid Looping Video */
+      .scene-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .scene-plate {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Video overlay at 100% width, 112.5% height, top -6.25% */
+      .scene-video {
+        position: absolute;
+        top: -6.25%;
+        left: 0;
+        width: 100%;
+        height: 112.5%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Content Layer */
+      .hero-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        pointer-events: auto;
+      }
+
+      /* ================= Nav ================= */
+      /* Logo at (31, 23) */
+      .nav-logo {
+        position: absolute;
+        left: calc(31 * var(--u));
+        top: calc(23 * var(--u));
+        display: inline-flex;
+        align-items: center;
+        gap: calc(10 * var(--u));
+        font-family: 'Grandstander', cursive, sans-serif;
+        font-weight: 900;
+        font-size: calc(29.5 * var(--u));
+        line-height: 1;
+        color: #ffffff;
+        text-shadow: 0 calc(2 * var(--u)) calc(8 * var(--u)) rgba(28, 70, 120, 0.2);
+        cursor: pointer;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+
+      .nav-logo:hover {
+        transform: translateY(calc(-2 * var(--u)));
+        opacity: 0.95;
+      }
+
+      .sprout-icon {
+        width: calc(26 * var(--u));
+        height: calc(26 * var(--u));
+        display: block;
+        flex-shrink: 0;
+      }
+
+      /* Nav Pill at (443, 13), 546x50, radius 25, rgba(173,196,174,.45) */
+      .nav-pill {
+        position: absolute;
+        left: calc(443 * var(--u));
+        top: calc(13 * var(--u));
+        width: calc(546 * var(--u));
+        height: calc(50 * var(--u));
+        border-radius: calc(25 * var(--u));
+        background-color: rgba(173, 196, 174, 0.45);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 calc(4 * var(--u)) calc(16 * var(--u)) rgba(30, 60, 40, 0.08);
+        display: flex;
+        align-items: center;
+        padding-left: calc(49 * var(--u));
+        padding-right: calc(49 * var(--u));
+        justify-content: space-between;
+        transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.25s ease;
+      }
+
+      .nav-pill:hover {
+        transform: translateY(calc(-2 * var(--u)));
+        background-color: rgba(173, 196, 174, 0.55);
+      }
+
+      .nav-pill-item {
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: calc(19.5 * var(--u));
+        color: #ffffff;
+        letter-spacing: -0.01em;
+        transition: opacity 0.2s ease;
+      }
+
+      .nav-pill-item:hover {
+        opacity: 0.85;
+      }
+
+      .nav-pill-dot {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: calc(20 * var(--u));
+        line-height: 1;
+        user-select: none;
+      }
+
+      /* Join us Nav Pill at (1311, 14), 105x45, radius 22.5 */
+      .nav-join-btn {
+        position: absolute;
+        left: calc(1311 * var(--u));
+        top: calc(14 * var(--u));
+        width: calc(105 * var(--u));
+        height: calc(45 * var(--u));
+        border-radius: calc(22.5 * var(--u));
+        background-color: #ffffff;
+        color: var(--green-btn);
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: calc(18.5 * var(--u));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 calc(4 * var(--u)) calc(12 * var(--u)) rgba(28, 70, 120, 0.16);
+        transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+      }
+
+      .nav-join-btn:hover {
+        transform: translateY(calc(-2 * var(--u)));
+        box-shadow: 0 calc(6 * var(--u)) calc(16 * var(--u)) rgba(28, 70, 120, 0.24);
+      }
+
+      /* ================= Copy, Centred ================= */
+      .copy-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        pointer-events: none;
+      }
+
+      /* Kicker: "HOLLYOAK'S" 40.5px, cap top at y = 203 */
+      .hero-kicker {
+        position: absolute;
+        top: calc(203 * var(--u));
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-family: 'Grandstander', cursive, sans-serif;
+        font-weight: 900;
+        font-size: calc(40.5 * var(--u));
+        line-height: 1;
+        letter-spacing: 0.05em;
+        color: #ffffff;
+        text-shadow: 0 calc(3 * var(--u)) calc(12 * var(--u)) var(--blue-shadow);
+        pointer-events: auto;
+      }
+
+      /* Headline: "PLUCKY / SPROUT SQUAD", 143.5px, pitch 118px, cap top at y = 261 */
+      .hero-headline {
+        position: absolute;
+        top: calc(261 * var(--u));
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-family: 'Grandstander', cursive, sans-serif;
+        font-weight: 900;
+        font-size: calc(143.5 * var(--u));
+        line-height: calc(118 * var(--u));
+        color: #ffffff;
+        text-shadow: 0 calc(4 * var(--u)) calc(18 * var(--u)) var(--blue-shadow);
+        pointer-events: auto;
+      }
+
+      .headline-line {
+        display: block;
+        transform-origin: center bottom;
+      }
+
+      /* Subline: Inter 21.2px / 27px, three lines, sits at y = 522 */
+      .hero-subline {
+        position: absolute;
+        top: calc(522 * var(--u));
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: calc(21.2 * var(--u));
+        line-height: calc(27 * var(--u));
+        color: #ffffff;
+        text-shadow: 0 calc(2 * var(--u)) calc(10 * var(--u)) rgba(28, 70, 120, 0.22);
+        white-space: pre-line;
+        pointer-events: auto;
+      }
+
+      /* Hero Buttons */
+      /* Join us: white pill, 144x59 at (550, 617), green 22px */
+      .hero-btn-join {
+        position: absolute;
+        left: calc(550 * var(--u));
+        top: calc(617 * var(--u));
+        width: calc(144 * var(--u));
+        height: calc(59 * var(--u));
+        border-radius: calc(29.5 * var(--u));
+        background-color: #ffffff;
+        color: var(--green-btn);
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: calc(22 * var(--u));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 calc(6 * var(--u)) calc(20 * var(--u)) rgba(28, 70, 120, 0.2);
+        pointer-events: auto;
+        transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+      }
+
+      .hero-btn-join:hover {
+        transform: translateY(calc(-2 * var(--u)));
+        box-shadow: 0 calc(10 * var(--u)) calc(26 * var(--u)) rgba(28, 70, 120, 0.28);
+      }
+
+      /* Watch preview: mint pill rgba(204,218,173,.6) with blur, 184x58 at (707, 619) */
+      .hero-btn-preview {
+        position: absolute;
+        left: calc(707 * var(--u));
+        top: calc(619 * var(--u));
+        width: calc(184 * var(--u));
+        height: calc(58 * var(--u));
+        border-radius: calc(29 * var(--u));
+        background-color: rgba(204, 218, 173, 0.6);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        color: #ffffff;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: calc(19.5 * var(--u));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: calc(10 * var(--u));
+        box-shadow: 0 calc(6 * var(--u)) calc(20 * var(--u)) rgba(28, 70, 120, 0.15);
+        pointer-events: auto;
+        transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .hero-btn-preview:hover {
+        transform: translateY(calc(-2 * var(--u)));
+        background-color: rgba(204, 218, 173, 0.75);
+        box-shadow: 0 calc(10 * var(--u)) calc(26 * var(--u)) rgba(28, 70, 120, 0.22);
+      }
+
+      .btn-play-triangle {
+        width: calc(15 * var(--u));
+        height: calc(15 * var(--u));
+        fill: #ffffff;
+        flex-shrink: 0;
+      }
+
+      /* ================= Chapters Row ================= */
+      /* Title: "CHAPTERS" 36px at (137, 866) */
+      .chapters-title {
+        position: absolute;
+        left: calc(137 * var(--u));
+        top: calc(866 * var(--u));
+        font-family: 'Grandstander', cursive, sans-serif;
+        font-weight: 900;
+        font-size: calc(36 * var(--u));
+        line-height: 1;
+        letter-spacing: 0.04em;
+        color: #ffffff;
+        text-shadow: 0 calc(3 * var(--u)) calc(12 * var(--u)) var(--blue-shadow);
+      }
+
+      /* Link: "browse all chapters ›" 22px, right-aligned to x = 1308 */
+      .chapters-link {
+        position: absolute;
+        right: calc(132 * var(--u)); /* 1440 - 1308 = 132u */
+        top: calc(875 * var(--u));
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: calc(22 * var(--u));
+        line-height: 1;
+        color: #ffffff;
+        text-shadow: 0 calc(2 * var(--u)) calc(8 * var(--u)) var(--blue-shadow);
+        display: inline-flex;
+        align-items: center;
+        gap: calc(6 * var(--u));
+        cursor: pointer;
+        white-space: nowrap;
+        transition: opacity 0.2s ease;
+      }
+
+      .chapters-link:hover {
+        opacity: 0.9;
+      }
+
+      .chapters-link .chevron {
+        display: inline-block;
+        font-size: calc(24 * var(--u));
+        transition: transform 0.25s ease;
+      }
+
+      .chapters-link:hover .chevron {
+        transform: translateX(calc(5 * var(--u)));
+      }
+
+      /* Cards: three 378x273 cards at x = 133, 531, 929 (y = 913), radius 15, soft shadow */
+      .chapter-card {
+        position: absolute;
+        top: calc(913 * var(--u));
+        width: calc(378 * var(--u));
+        height: calc(273 * var(--u));
+        border-radius: calc(15 * var(--u));
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: 0 calc(12 * var(--u)) calc(30 * var(--u)) rgba(18, 48, 80, 0.22);
+        background-color: #8da4a1;
+        transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+        will-change: transform;
+      }
+
+      .card-1 {
+        left: calc(133 * var(--u));
+      }
+
+      .card-2 {
+        left: calc(531 * var(--u));
+      }
+
+      .card-3 {
+        left: calc(929 * var(--u));
+      }
+
+      /* Hover: cards lift 8u, art zooms to 1.05 */
+      .chapter-card:hover {
+        transform: translateY(calc(-8 * var(--u)));
+        box-shadow: 0 calc(22 * var(--u)) calc(44 * var(--u)) rgba(18, 48, 80, 0.32);
+      }
+
+      .card-art-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        will-change: transform;
+      }
+
+      .chapter-card:hover .card-art-img {
+        transform: scale(1.05);
+      }
+
+      /* White rounded play triangle 20px in from bottom-left */
+      .card-play-btn {
+        position: absolute;
+        left: calc(20 * var(--u));
+        bottom: calc(20 * var(--u));
+        width: calc(44 * var(--u));
+        height: calc(44 * var(--u));
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 calc(4 * var(--u)) calc(12 * var(--u)) rgba(0, 0, 0, 0.2);
+        transition: transform 0.25s ease, background-color 0.25s ease;
+      }
+
+      .chapter-card:hover .card-play-btn {
+        background-color: rgba(255, 255, 255, 0.52);
+        transform: scale(1.08);
+      }
+
+      .card-play-triangle {
+        width: calc(18 * var(--u));
+        height: calc(18 * var(--u));
+        fill: #ffffff;
+        margin-left: calc(2 * var(--u));
+      }
+
+      /* Interactive Preview Modal */
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(14, 30, 48, 0.65);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        padding: 20px;
+      }
+
+      .modal-backdrop.is-open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-card {
+        background: linear-gradient(145deg, #ffffff, #f4f8f4);
+        border-radius: 24px;
+        padding: 32px;
+        max-width: 560px;
+        width: 100%;
+        color: #2c443b;
+        box-shadow: 0 24px 60px rgba(10, 30, 50, 0.35);
+        position: relative;
+        transform: scale(0.92) translateY(12px);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .modal-backdrop.is-open .modal-card {
+        transform: scale(1) translateY(0);
+      }
+
+      .modal-close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background-color: rgba(91, 135, 92, 0.12);
+        color: #436a44;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+      }
+
+      .modal-close-btn:hover {
+        background-color: rgba(91, 135, 92, 0.22);
+        transform: scale(1.06);
+      }
+
+      .modal-title {
+        font-family: 'Grandstander', cursive, sans-serif;
+        font-size: 32px;
+        color: #3b663c;
+        margin-bottom: 12px;
+        line-height: 1.15;
+      }
+
+      .modal-body {
+        font-size: 16px;
+        line-height: 1.55;
+        color: #4b6356;
+        margin-bottom: 24px;
+      }
+
+      .modal-form {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .modal-input {
+        flex: 1 1 240px;
+        padding: 12px 18px;
+        border: 2px solid #c9dec9;
+        border-radius: 9999px;
+        font-family: 'Inter', sans-serif;
+        font-size: 15px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .modal-input:focus {
+        border-color: #5b875c;
+      }
+
+      .modal-submit {
+        padding: 12px 24px;
+        background-color: #5b875c;
+        color: #ffffff;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        border-radius: 9999px;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+
+      .modal-submit:hover {
+        background-color: #4c734d;
+        transform: translateY(-1px);
+      }
+
+      /* ================= Responsive: Phones (<= 820px) ================= */
+      @media (max-width: 820px) {
+        .hero-frame {
+          width: 100vw;
+          height: auto;
+          min-height: 100vh;
+          overflow-x: hidden;
+          padding-bottom: 60px;
+        }
+
+        /* Scene: 9:8 plate and video in 9:8 box sized to hero's height shifted so boy and dog stay in view */
+        .scene-container {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          aspect-ratio: 9 / 8;
+          left: 18%;
+          transform: translateX(-18%);
+          width: auto;
+          min-width: 100%;
+        }
+
+        .scene-plate {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .scene-video {
+          width: 100%;
+          height: 112.5%;
+          top: -6.25%;
+          left: 0;
+          object-fit: cover;
+        }
+
+        /* Nav on mobile: compact, with logo and Join us */
+        .hero-nav {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 20px 24px;
+          z-index: 10;
+        }
+
+        .nav-logo {
+          position: static;
+          font-size: 26px;
+          gap: 8px;
+        }
+
+        .sprout-icon {
+          width: 24px;
+          height: 24px;
+        }
+
+        .nav-pill {
+          display: none; /* Hide center sage pill on mobile */
+        }
+
+        .nav-join-btn {
+          position: static;
+          width: 96px;
+          height: 40px;
+          font-size: 16px;
+          border-radius: 9999px;
+        }
+
+        /* Copy, stacked and centred in flow with headline at 51px */
+        .copy-container {
+          position: relative;
+          top: auto;
+          left: auto;
+          transform: none;
+          margin-top: 20px;
+          padding: 0 20px;
+          pointer-events: auto;
+        }
+
+        .hero-kicker {
+          position: static;
+          top: auto;
+          left: auto;
+          font-size: 22px;
+          margin-bottom: 10px;
+          text-shadow: 0 2px 8px rgba(28, 70, 120, 0.4);
+        }
+
+        .hero-headline {
+          position: static;
+          top: auto;
+          left: auto;
+          font-size: 51px;
+          line-height: 48px;
+          white-space: normal;
+          margin-bottom: 16px;
+          text-shadow: 0 3px 12px rgba(28, 70, 120, 0.4);
+        }
+
+        .hero-headline .headline-line {
+          display: block;
+        }
+
+        .hero-subline {
+          position: static;
+          top: auto;
+          left: auto;
+          font-size: 16px;
+          line-height: 23px;
+          max-width: 360px;
+          margin: 0 auto 24px auto;
+          text-shadow: 0 2px 8px rgba(28, 70, 120, 0.35);
+        }
+
+        .hero-buttons-group {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          margin-bottom: 40px;
+        }
+
+        .hero-btn-join {
+          position: static;
+          width: 130px;
+          height: 50px;
+          font-size: 18px;
+          border-radius: 9999px;
+        }
+
+        .hero-btn-preview {
+          position: static;
+          width: 165px;
+          height: 50px;
+          font-size: 16px;
+          border-radius: 9999px;
+          gap: 8px;
+        }
+
+        .btn-play-triangle {
+          width: 14px;
+          height: 14px;
+        }
+
+        /* Chapters on mobile: swipeable row of cards */
+        .chapters-section {
+          position: relative;
+          margin-top: 10px;
+          padding: 0 0 20px 0;
+        }
+
+        .chapters-header {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          padding: 0 24px 16px 24px;
+        }
+
+        .chapters-title {
+          position: static;
+          top: auto;
+          left: auto;
+          font-size: 26px;
+          text-shadow: 0 2px 8px rgba(28, 70, 120, 0.4);
+        }
+
+        .chapters-link {
+          position: static;
+          top: auto;
+          right: auto;
+          font-size: 16px;
+          text-shadow: 0 2px 8px rgba(28, 70, 120, 0.35);
+        }
+
+        .chapters-link .chevron {
+          font-size: 18px;
+        }
+
+        .chapters-carousel {
+          display: flex;
+          gap: 16px;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          padding: 8px 24px 16px 24px;
+          scrollbar-width: none;
+        }
+
+        .chapters-carousel::-webkit-scrollbar {
+          display: none;
+        }
+
+        .chapter-card {
+          position: static;
+          top: auto;
+          left: auto;
+          flex: 0 0 280px;
+          height: 202px;
+          scroll-snap-align: start;
+          border-radius: 14px;
+          box-shadow: 0 8px 20px rgba(18, 48, 80, 0.25);
+        }
+
+        .card-play-btn {
+          width: 38px;
+          height: 38px;
+          left: 14px;
+          bottom: 14px;
+        }
+
+        .card-play-triangle {
+          width: 15px;
+          height: 15px;
+        }
+      }
+
+      /* Reduced motion preferences */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .scene-video {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Main Hero Landing Frame -->
+    <main class="hero-frame" id="heroFrame">
+      <!-- Scene Background (Plate Image + Synchronized Looping Video) -->
+      <div class="scene-container" aria-hidden="true">
+        <img
+          src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/3ca5d10d-ea2f-4907-876f-33bde169469e.jpg"
+          alt="Sunny hillside anime plate with boy, dog, wildflowers and cumulus clouds"
+          class="scene-plate"
+        />
+        <video
+          id="sceneVideo"
+          class="scene-video"
+          src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/d2cb5bef-f92b-4e91-ae93-8dc6555e56ac.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          aria-label="Subtle breeze motion over hillside, rippling grass, nodding flowers and drifting clouds"
+        ></video>
+      </div>
+
+      <!-- Foreground Interactive UI Layer -->
+      <div class="hero-content">
+        <!-- Navigation Bar -->
+        <header class="hero-nav" role="banner">
+          <!-- Logo -->
+          <a href="#" class="nav-logo" id="logoLink" aria-label="Meadowbell Home">
+            <svg class="sprout-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M14 26V13M14 13C14 7 19.5 5 23 5C23 10.5 19.5 15 14 13ZM14 13C14 8 9 6.5 5.5 7C5.5 12.5 8.5 16 14 13Z" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="rgba(255,255,255,0.2)"/>
+            </svg>
+            <span>Meadowbell</span>
+          </a>
+
+          <!-- Nav Pill -->
+          <nav class="nav-pill" id="navPill" aria-label="Main Navigation">
+            <a href="#farm" class="nav-pill-item">Farm</a>
+            <span class="nav-pill-dot" aria-hidden="true">·</span>
+            <a href="#gear" class="nav-pill-item">Gear</a>
+            <span class="nav-pill-dot" aria-hidden="true">·</span>
+            <a href="#chapters" class="nav-pill-item">Chapters</a>
+            <span class="nav-pill-dot" aria-hidden="true">·</span>
+            <a href="#crew" class="nav-pill-item">Our Crew</a>
+          </nav>
+
+          <!-- Join Us (Nav) -->
+          <button class="nav-join-btn" id="navJoinBtn" aria-label="Join Sprout Squad">
+            Join us
+          </button>
+        </header>
+
+        <!-- Centred Copy Section -->
+        <div class="copy-container">
+          <!-- Kicker: HOLLYOAK'S -->
+          <div class="hero-kicker" id="heroKicker">HOLLYOAK'S</div>
+
+          <!-- Headline: PLUCKY / SPROUT SQUAD -->
+          <h1 class="hero-headline" id="heroHeadline">
+            <span class="headline-line" id="headlineLine1">PLUCKY</span>
+            <span class="headline-line" id="headlineLine2">SPROUT SQUAD</span>
+          </h1>
+
+          <!-- Subline: 3 lines -->
+          <p class="hero-subline" id="heroSubline">Learn the Ways of the Meadow with
+Hollyoak's Plucky Sprout Squad! Each chapter is
+packed with play, chores, and wonder.</p>
+
+          <!-- Hero Buttons -->
+          <div class="hero-buttons-group" id="heroButtonsGroup">
+            <button class="hero-btn-join" id="heroJoinBtn" aria-label="Join Hollyoak's Sprout Squad">
+              Join us
+            </button>
+            <button class="hero-btn-preview" id="watchPreviewBtn" aria-label="Watch series preview">
+              <svg class="btn-play-triangle" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 4.5C7 3.65 7.95 3.15 8.65 3.62L19.35 10.62C20.01 11.06 20.01 12.04 19.35 12.48L8.65 19.48C7.95 19.95 7 19.45 7 18.6V4.5Z" />
+              </svg>
+              <span>Watch preview</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Chapters Section -->
+        <section class="chapters-section" id="chapters" aria-label="Episode Chapters">
+          <div class="chapters-header">
+            <h2 class="chapters-title" id="chaptersTitle">CHAPTERS</h2>
+            <a href="#all-chapters" class="chapters-link" id="chaptersLink" aria-label="Browse all series chapters">
+              <span>browse all chapters</span>
+              <span class="chevron" aria-hidden="true">›</span>
+            </a>
+          </div>
+
+          <div class="chapters-carousel" id="chaptersCarousel">
+            <!-- Card 1: Vegetable garden with tomato stakes and cottage -->
+            <article class="chapter-card card-1" id="chapterCard1" tabindex="0" role="button" aria-label="Play Chapter 1: The Great Tomato Mystery">
+              <img
+                src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/cd2d844f-ae3f-4fa9-8067-b077530b6e71.webp"
+                alt="Vegetable garden with tomato stakes and cottage"
+                class="card-art-img"
+                loading="lazy"
+              />
+              <div class="card-play-btn" aria-hidden="true">
+                <svg class="card-play-triangle" viewBox="0 0 24 24">
+                  <path d="M7 4.5C7 3.65 7.95 3.15 8.65 3.62L19.35 10.62C20.01 11.06 20.01 12.04 19.35 12.48L8.65 19.48C7.95 19.95 7 19.45 7 18.6V4.5Z" />
+                </svg>
+              </div>
+            </article>
+
+            <!-- Card 2: Boy and dog on a hill path among sheep above the sea -->
+            <article class="chapter-card card-2" id="chapterCard2" tabindex="0" role="button" aria-label="Play Chapter 2: High Hill Shepherd">
+              <img
+                src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/48f5b97e-c27c-4afd-9427-eb35aebd1751.webp"
+                alt="A boy and dog on a hill path among sheep above the sea"
+                class="card-art-img"
+                loading="lazy"
+              />
+              <div class="card-play-btn" aria-hidden="true">
+                <svg class="card-play-triangle" viewBox="0 0 24 24">
+                  <path d="M7 4.5C7 3.65 7.95 3.15 8.65 3.62L19.35 10.62C20.01 11.06 20.01 12.04 19.35 12.48L8.65 19.48C7.95 19.95 7 19.45 7 18.6V4.5Z" />
+                </svg>
+              </div>
+            </article>
+
+            <!-- Card 3: Girl in a straw hat flying a kite on a breezy hill -->
+            <article class="chapter-card card-3" id="chapterCard3" tabindex="0" role="button" aria-label="Play Chapter 3: Kite Over Hollyoak">
+              <img
+                src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/cde5384e-ce4d-423f-925a-451b779066e0.webp"
+                alt="A girl in a straw hat flying a kite on a breezy hill"
+                class="card-art-img"
+                loading="lazy"
+              />
+              <div class="card-play-btn" aria-hidden="true">
+                <svg class="card-play-triangle" viewBox="0 0 24 24">
+                  <path d="M7 4.5C7 3.65 7.95 3.15 8.65 3.62L19.35 10.62C20.01 11.06 20.01 12.04 19.35 12.48L8.65 19.48C7.95 19.95 7 19.45 7 18.6V4.5Z" />
+                </svg>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modal Dialog for Previews & Joining -->
+    <div class="modal-backdrop" id="interactiveModal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal-card" id="modalCard">
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close dialog">&times;</button>
+        <h3 class="modal-title" id="modalTitle">Hollyoak's Meadow</h3>
+        <p class="modal-body" id="modalDesc">Discover the animated world of Hollyoak and join the Plucky Sprout Squad for adventures in nature!</p>
+        <div id="modalActionArea"></div>
+      </div>
+    </div>
+
+    <!-- Vanilla JS: Web Animations entrance timeline, interactions, & video autoplay -->
+    <script>
+      (function () {
+        'use strict';
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Elements
+        const logo = document.getElementById('logoLink');
+        const navPill = document.getElementById('navPill');
+        const navJoin = document.getElementById('navJoinBtn');
+        const kicker = document.getElementById('heroKicker');
+        const line1 = document.getElementById('headlineLine1');
+        const line2 = document.getElementById('headlineLine2');
+        const subline = document.getElementById('heroSubline');
+        const joinBtn = document.getElementById('heroJoinBtn');
+        const previewBtn = document.getElementById('watchPreviewBtn');
+        const chaptersTitle = document.getElementById('chaptersTitle');
+        const chaptersLink = document.getElementById('chaptersLink');
+        const card1 = document.getElementById('chapterCard1');
+        const card2 = document.getElementById('chapterCard2');
+        const card3 = document.getElementById('chapterCard3');
+        const sceneVideo = document.getElementById('sceneVideo');
+
+        // Modal Elements
+        const modal = document.getElementById('interactiveModal');
+        const modalClose = document.getElementById('modalCloseBtn');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalAction = document.getElementById('modalActionArea');
+
+        // Ensure video loops smoothly
+        if (sceneVideo && !prefersReducedMotion) {
+          sceneVideo.play().catch(function () {
+            // Autoplay policy handled silently
+          });
+        }
+
+        // Entrance Choreography using Web Animations API (one timeline, run once)
+        if (!prefersReducedMotion) {
+          // Nav elements drop in
+          const navDropKeyframes = [
+            { opacity: 0, transform: 'translateY(-28px)' },
+            { opacity: 1, transform: 'translateY(0)' }
+          ];
+          const navDropTiming = { duration: 750, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards' };
+
+          if (logo) logo.animate(navDropKeyframes, Object.assign({}, navDropTiming, { delay: 40 }));
+          if (navPill) navPill.animate(navDropKeyframes, Object.assign({}, navDropTiming, { delay: 90 }));
+          if (navJoin) navJoin.animate(navDropKeyframes, Object.assign({}, navDropTiming, { delay: 140 }));
+
+          // Kicker un-blurs
+          if (kicker) {
+            kicker.animate(
+              [
+                { opacity: 0, filter: 'blur(14px)', transform: 'translateY(8px)' },
+                { opacity: 1, filter: 'blur(0px)', transform: 'translateY(0)' }
+              ],
+              { duration: 650, delay: 240, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)', fill: 'forwards' }
+            );
+          }
+
+          // Headline lines spring up out of blur, 0.16s (160ms) apart
+          const springKeyframes = [
+            { opacity: 0, filter: 'blur(16px)', transform: 'translateY(42px) scale(0.95)' },
+            { opacity: 1, filter: 'blur(0px)', transform: 'translateY(0) scale(1)' }
+          ];
+          const springTiming = { duration: 800, easing: 'cubic-bezier(0.16, 1.25, 0.3, 1)', fill: 'forwards' };
+
+          if (line1) line1.animate(springKeyframes, Object.assign({}, springTiming, { delay: 360 }));
+          if (line2) line2.animate(springKeyframes, Object.assign({}, springTiming, { delay: 520 })); // 360 + 160ms = 520ms (0.16s apart)
+
+          // Subline rises
+          if (subline) {
+            subline.animate(
+              [
+                { opacity: 0, transform: 'translateY(22px)' },
+                { opacity: 1, transform: 'translateY(0)' }
+              ],
+              { duration: 680, delay: 680, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards' }
+            );
+          }
+
+          // Buttons rise
+          const btnRiseKeyframes = [
+            { opacity: 0, transform: 'translateY(20px)' },
+            { opacity: 1, transform: 'translateY(0)' }
+          ];
+          const btnTiming = { duration: 620, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards' };
+
+          if (joinBtn) joinBtn.animate(btnRiseKeyframes, Object.assign({}, btnTiming, { delay: 820 }));
+          if (previewBtn) previewBtn.animate(btnRiseKeyframes, Object.assign({}, btnTiming, { delay: 880 }));
+
+          // Chapters title and link rise
+          const headerRiseKeyframes = [
+            { opacity: 0, transform: 'translateY(18px)' },
+            { opacity: 1, transform: 'translateY(0)' }
+          ];
+          const headerTiming = { duration: 600, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards' };
+
+          if (chaptersTitle) chaptersTitle.animate(headerRiseKeyframes, Object.assign({}, headerTiming, { delay: 960 }));
+          if (chaptersLink) chaptersLink.animate(headerRiseKeyframes, Object.assign({}, headerTiming, { delay: 1000 }));
+
+          // The three cards rise in turn
+          const cardKeyframes = [
+            { opacity: 0, transform: 'translateY(32px)' },
+            { opacity: 1, transform: 'translateY(0)' }
+          ];
+          const cardTiming = { duration: 700, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards' };
+
+          if (card1) card1.animate(cardKeyframes, Object.assign({}, cardTiming, { delay: 1060 }));
+          if (card2) card2.animate(cardKeyframes, Object.assign({}, cardTiming, { delay: 1180 }));
+          if (card3) card3.animate(cardKeyframes, Object.assign({}, cardTiming, { delay: 1300 }));
+        }
+
+        // Modal Helpers
+        function openModal(title, desc, contentHtml) {
+          modalTitle.textContent = title;
+          modalDesc.innerHTML = desc;
+          modalAction.innerHTML = contentHtml || '';
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+          modalClose.focus();
+        }
+
+        function closeModal() {
+          modal.classList.remove('is-open');
+          modal.setAttribute('aria-hidden', 'true');
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', function (e) {
+          if (e.target === modal) closeModal();
+        });
+        window.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal();
+          }
+        });
+
+        // Interactive Handlers
+        function handleJoin() {
+          openModal(
+            "Join Hollyoak's Sprout Squad",
+            "Be the first to explore the sunny meadows! Receive behind-the-scenes hand-drawn art, premiere dates, and family activity sheets.",
+            '<form class="modal-form" onsubmit="event.preventDefault(); this.innerHTML=\'<p style=\\\'color:#3b663c;font-weight:600;padding:12px 0;\\\'>🌱 Welcome to the Squad! We have saved your sprout badge.</p>\';">' +
+              '<input type="email" class="modal-input" placeholder="Enter your parent or family email" required aria-label="Family email" />' +
+              '<button type="submit" class="modal-submit">Get Sprout Badge</button>' +
+            '</form>'
+          );
+        }
+
+        function handlePreview() {
+          openModal(
+            "Hollyoak's Plucky Sprout Squad Preview",
+            "Join our curious boy and his trusty beagle across rolling green pastures, blooming wildflowers, and afternoon clouds in Meadowbell's heartwarming animation.",
+            '<div style="position:relative;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.15);background:#334;">' +
+              '<video src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/d2cb5bef-f92b-4e91-ae93-8dc6555e56ac.mp4" controls autoplay loop muted playsinline style="width:100%;height:auto;display:block;"></video>' +
+            '</div>'
+          );
+        }
+
+        const chapterData = {
+          'chapterCard1': {
+            title: 'Chapter 1: The Great Tomato Mystery',
+            desc: 'A garden mystery among the wooden stakes and sunny vines. Learn how soil and ladybugs protect the sweetest harvest at Hollyoak cottage.'
+          },
+          'chapterCard2': {
+            title: 'Chapter 2: High Hill Shepherd',
+            desc: 'The boy and dog follow the stone wall path overlooking the gleaming blue sea. A flock of gentle meadow sheep need guidance back before the dusk bells ring.'
+          },
+          'chapterCard3': {
+            title: 'Chapter 3: Kite Over Hollyoak',
+            desc: 'With ribbons flying high over the breezy afternoon ridge, a girl in a straw hat discovers where the warm summer wind takes her handwritten meadow notes.'
+          }
+        };
+
+        function handleCardClick(id) {
+          const ch = chapterData[id] || {
+            title: 'Meadow Chapter Story',
+            desc: 'Explore the daily wonders, friendly chores, and golden sunshine of Hollyoak.'
+          };
+          openModal(
+            ch.title,
+            ch.desc,
+            '<div style="display:flex;gap:12px;margin-top:16px;">' +
+              '<button class="modal-submit" onclick="alert(\'Streaming preview clip for ' + ch.title + '\');">Watch Chapter Clip</button>' +
+            '</div>'
+          );
+        }
+
+        if (navJoin) navJoin.addEventListener('click', handleJoin);
+        if (joinBtn) joinBtn.addEventListener('click', handleJoin);
+        if (previewBtn) previewBtn.addEventListener('click', handlePreview);
+
+        [card1, card2, card3].forEach(function (card) {
+          if (!card) return;
+          card.addEventListener('click', function () {
+            handleCardClick(card.id);
+          });
+          card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleCardClick(card.id);
+            }
+          });
+        });
+
+      })();
+    </script>
+  </body>
+</html>
